@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CoffeeShopAPI.Models.Product>
+
+@{
+    ViewData["Title"] = "Meniul Cafenelei (CoffeeShop)";
+    // Adaugă layout-ul standard dacă îl ai (ex: _Layout.cshtml)
+    // Layout = "_Layout"; 
+}
+
+<div class="container">
+    <h2 class="mt-4 mb-4">@ViewData["Title"]</h2>
+
+    @* Poți adăuga un buton de "Adaugă Produs Nou" aici pentru Admin (dacă e cazul) *@
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.Category)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Iterăm prin lista de produse primită de la Controller *@
+            @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price) RON</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (!Model.Any())
+    {
+            <div class="alert alert-warning">
+                Meniul este momentan gol. Vă rugăm să adăugați produse folosind funcționalitatea de Admin.
+            </div>
+    }
+</div>
+
+@* NOTĂ: Asigură-te că fișierele Bootstrap CSS/JS sunt incluse în pagina ta (de obicei prin _Layout.cshtml sau direct în index.html din wwwroot, dar în MVC ele ar trebui să fie în wwwroot). *@
