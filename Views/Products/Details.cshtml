@@ -1,0 +1,51 @@
+﻿@model CoffeeShopAPI.Models.Product
+
+@{
+    ViewData["Title"] = "Detalii Produs";
+
+    // --- LOGICA IMAGINI (Aceeași ca la Index) ---
+    string imageUrl = "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600";
+    if (Model.Category == "Cafea") { imageUrl = "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=600"; }
+    else if (Model.Category == "Ceai") { imageUrl = "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=600"; }
+    else if (Model.Category == "Deserturi") { imageUrl = "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=600"; }
+    else if (Model.Category == "Snack-uri") { imageUrl = "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=600"; }
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card card-custom shadow-lg">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="@imageUrl" class="img-fluid rounded-start h-100" style="object-fit: cover; min-height: 400px;" alt="@Model.Name">
+                    </div>
+
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="card-body p-5">
+                            <span class="badge bg-warning text-dark mb-2">@Model.Category</span>
+
+                            <h2 class="display-5 fw-bold mb-3" style="color: var(--coffee-gold); font-family: 'Times New Roman', serif;">
+                                @Model.Name
+                            </h2>
+
+                            <h3 class="text-white mb-4">@Model.Price.ToString("0.00") RON</h3>
+
+                            <p class="card-text text-cream lead mb-5">
+                                @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "O alegere excelentă pentru a-ți însenina ziua. Preparat din ingrediente proaspete și de calitate superioară.")
+                            </p>
+
+                            <div class="d-grid gap-3">
+                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-gold btn-lg">
+                                    <i class="fas fa-shopping-cart me-2"></i> Adaugă în Coș
+                                </a>
+                                <a asp-action="Index" class="btn btn-outline-light">
+                                    Înapoi la Meniu
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

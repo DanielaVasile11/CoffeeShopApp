@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Bine ați venit";
+}
+
+<div class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">CoffeeShop Experience</h1>
+        <p class="lead text-white mb-4">Gustul autentic al cafelei, într-o atmosferă rafinată.</p>
+        <a class="btn btn-gold btn-lg" asp-controller="Products" asp-action="Index">Vezi Meniul Nostru</a>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="mb-3" style="color: var(--coffee-gold); font-family: 'Times New Roman', serif;">Despre Noi</h2>
+            <p class="text-muted" style="color: var(--coffee-cream) !important;">
+                Nu servim doar cafea, ci o experiență completă. Folosim boabe proaspăt prăjite și ingrediente premium pentru a-ți oferi momentul tău perfect de relaxare.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card card-custom h-100 p-4 text-center">
+                <div class="card-body">
+                    <div class="display-4 mb-3">☕</div>
+                    <h4 class="card-title">Cafea Premium</h4>
+                    <p class="card-text">Selecție de boabe Arabica 100%, preparate cu măiestrie de barista noștri experți.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card card-custom h-100 p-4 text-center">
+                <div class="card-body">
+                    <div class="display-4 mb-3">✨</div>
+                    <h4 class="card-title">Atmosferă Elegantă</h4>
+                    <p class="card-text">Design modern cu accente clasice, muzică în surdină și un ambient perfect pentru discuții.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card card-custom h-100 p-4 text-center">
+                <div class="card-body">
+                    <div class="display-4 mb-3">🥐</div>
+                    <h4 class="card-title">Gustări Proaspete</h4>
+                    <p class="card-text">Croissante, prăjituri și sandwich-uri pregătite zilnic în bucătăria noastră.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid py-5" style="background-color: var(--coffee-dark); border-top: 1px solid var(--coffee-gold);">
+    <div class="container text-center">
+        <h3 class="mb-4" style="color: var(--coffee-gold);">Gata să încerci?</h3>
+        <a class="btn btn-outline-light btn-lg" asp-controller="Products" asp-action="Index">Comandă Acum</a>
+    </div>
+</div>

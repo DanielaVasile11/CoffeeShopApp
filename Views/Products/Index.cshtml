@@ -1,43 +1,90 @@
 ﻿@model IEnumerable<CoffeeShopAPI.Models.Product>
 
 @{
-    ViewData["Title"] = "Meniul Cafenelei (CoffeeShop)";
-    // Adaugă layout-ul standard dacă îl ai (ex: _Layout.cshtml)
-    // Layout = "_Layout"; 
+    ViewData["Title"] = "Meniul Nostru";
 }
 
-<div class="container">
-    <h2 class="mt-4 mb-4">@ViewData["Title"]</h2>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4" style="color: var(--coffee-gold); font-family: 'Times New Roman', serif;">
+            @ViewData["Title"]
+        </h1>
+        <p class="lead" style="color: var(--coffee-white);">Alege aromele tale preferate</p>
+        <hr class="w-25 mx-auto" style="border-color: var(--coffee-gold); opacity: 1;">
+    </div>
 
-    @* Poți adăuga un buton de "Adaugă Produs Nou" aici pentru Admin (dacă e cazul) *@
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            // LOGICA PENTRU IMAGINI AUTOMATE
+            string imageUrl = "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600"; // Default
 
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Name)</th>
-                <th>@Html.DisplayNameFor(model => model.Price)</th>
-                <th>@Html.DisplayNameFor(model => model.Category)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @* Iterăm prin lista de produse primită de la Controller *@
-            @foreach (var item in Model)
+            if (item.Category == "Cafea")
             {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Price) RON</td>
-                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
-                    </tr>
+                imageUrl = "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=600";
             }
-        </tbody>
-    </table>
+            else if (item.Category == "Ceai")
+            {
+                imageUrl = "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=600";
+            }
+            else if (item.Category == "Deserturi")
+            {
+                imageUrl = "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=600";
+            }
+            else if (item.Category == "Snack-uri")
+            {
+                imageUrl = "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=600";
+            }
+
+            <div class="col-md-4 mb-4">
+                <div class="card card-custom h-100 shadow-sm">
+                    <div style="height: 200px; overflow: hidden;">
+                        <img src="@imageUrl" class="card-img-top" alt="@item.Name" style="object-fit: cover; height: 100%; width: 100%;">
+                    </div>
+
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-2">
+                            <span class="badge bg-warning text-dark">@item.Category</span>
+                        </div>
+
+                        <h4 class="card-title mb-1">@item.Name</h4>
+                        <h5 class="mb-3" style="color: var(--coffee-cream);">@item.Price.ToString("0.00") RON</h5>
+
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+                            <p class="card-text small text-muted flex-grow-1">@item.Description</p>
+                        }
+                        else
+                        {
+                            <p class="card-text small text-muted flex-grow-1">Ingrediente premium, gust autentic.</p>
+                        }
+
+                        <div class="d-grid gap-2 mt-3">
+                            <div class="row gx-2">
+                                <div class="col-6">
+                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-light w-100 btn-sm">
+                                        Detalii
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Id" class="btn btn-gold w-100 btn-sm">
+                                        Comandă
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 
     @if (!Model.Any())
     {
-            <div class="alert alert-warning">
-                Meniul este momentan gol. Vă rugăm să adăugați produse folosind funcționalitatea de Admin.
-            </div>
+        <div class="text-center mt-5">
+            <p class="lead text-muted">Nu există produse care să corespundă criteriilor.</p>
+            <a asp-action="Index" class="btn btn-outline-warning">Vezi tot meniul</a>
+        </div>
     }
 </div>
-
-@* NOTĂ: Asigură-te că fișierele Bootstrap CSS/JS sunt incluse în pagina ta (de obicei prin _Layout.cshtml sau direct în index.html din wwwroot, dar în MVC ele ar trebui să fie în wwwroot). *@

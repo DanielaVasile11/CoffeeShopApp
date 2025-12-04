@@ -1,5 +1,4 @@
-﻿// ApplicationDbContext.cs
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using CoffeeShopAPI.Models;
 
 namespace CoffeeShopAPI.Data
@@ -11,9 +10,8 @@ namespace CoffeeShopAPI.Data
         {
         }
 
-        // Definim tabelele bazei de date
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
-        // Ar trebui adăugate Order și OrderItem, dar le lăsăm pentru etapa următoare.
+        // Adaugă DbSet pentru Orders și OrderItems în etapele următoare
     }
 }
