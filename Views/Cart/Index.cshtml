@@ -59,16 +59,29 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="card card-custom p-4">
-                    <h4 class="card-title mb-4">Sumar Comandă</h4>
-                    <div class="d-flex justify-content-between mb-4">
-                        <strong class="text-gold h4">Total:</strong>
-                        <strong class="text-gold h4">@total.ToString("0.00") RON</strong>
+                <div class="card card-custom p-4 shadow-sm">
+                    <h4 class="card-title mb-4" style="color: var(--coffee-gold);">Sumar Comandă</h4>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
+                        <span class="text-white h5 mb-0">Total:</span>
+                        <span class="text-gold h3 mb-0">@total.ToString("0.00") RON</span>
                     </div>
-                    <a asp-action="Checkout" class="btn btn-gold w-100 py-2">
-                        Finalizează Comanda
+
+                    <form asp-controller="Cart" asp-action="Checkout" method="post" class="d-grid gap-2">
+                        <button type="submit" class="btn btn-gold btn-lg">
+                            <i class="fab fa-stripe-s fa-lg me-2"></i> Plătește cu Cardul
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-2 mb-3">
+                        <small class="text-muted" style="font-size: 0.8rem;">
+                            <i class="fas fa-lock me-1"></i> Plată securizată prin Stripe
+                        </small>
+                    </div>
+
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-light w-100 py-2">
+                        Continuă Cumpărăturile
                     </a>
-                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-light w-100 mt-2 py-2">Continuă Cumpărăturile</a>
                 </div>
             </div>
         </div>
