@@ -65,7 +65,9 @@
                         <strong class="text-gold h4">Total:</strong>
                         <strong class="text-gold h4">@total.ToString("0.00") RON</strong>
                     </div>
-                    <button class="btn btn-gold w-100 py-2">Finalizează Comanda</button>
+                    <a asp-action="Checkout" class="btn btn-gold w-100 py-2">
+                        Finalizează Comanda
+                    </a>
                     <a asp-controller="Products" asp-action="Index" class="btn btn-outline-light w-100 mt-2 py-2">Continuă Cumpărăturile</a>
                 </div>
             </div>

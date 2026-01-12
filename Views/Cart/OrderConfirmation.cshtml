@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Comandă Plasată";
+}
+
+<div class="container py-5 text-center">
+    <div class="card card-custom p-5 d-inline-block shadow-lg" style="max-width: 600px;">
+
+        <div class="mb-4">
+            <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+        </div>
+
+        <h1 class="display-5 mb-3" style="color: var(--coffee-gold); font-family: 'Times New Roman', serif;">
+            Mulțumim pentru comandă!
+        </h1>
+
+        <p class="lead text-white mb-4">
+            Comanda ta a fost înregistrată cu succes și este în curs de preparare.
+            <br>
+            <small class="text-muted">Vei primi cafeaua proaspătă în cel mai scurt timp.</small>
+        </p>
+
+        <hr style="border-color: var(--coffee-gold);">
+
+        <div class="mt-4">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light me-2">Pagina Principală</a>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-gold">Mai doresc ceva</a>
+        </div>
+    </div>
+</div>

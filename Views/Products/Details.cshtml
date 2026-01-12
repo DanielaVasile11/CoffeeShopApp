@@ -35,9 +35,19 @@
                             </p>
 
                             <div class="d-grid gap-3">
-                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-gold btn-lg">
-                                    <i class="fas fa-shopping-cart me-2"></i> Adaugă în Coș
-                                </a>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-gold btn-lg w-100">
+                                            <i class="fas fa-shopping-cart me-2"></i> Adaugă în Coș
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a asp-controller="Favorites" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-outline-danger btn-lg w-100">
+                                            <i class="far fa-heart me-2"></i> Favorite
+                                        </a>
+                                    </div>
+                                </div>
+
                                 <a asp-action="Index" class="btn btn-outline-light">
                                     Înapoi la Meniu
                                 </a>

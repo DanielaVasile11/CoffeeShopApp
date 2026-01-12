@@ -1,0 +1,66 @@
+﻿@model List<CoffeeShopAPI.Models.Order>
+
+@{
+    // Titlul vine din Controller (Istoricul Meu sau Toate Comenzile)
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 style="color: var(--coffee-gold); font-family: 'Times New Roman', serif;">
+            <i class="fas fa-history me-2"></i> @ViewData["Title"]
+        </h2>
+        <a asp-controller="Products" asp-action="Index" class="btn btn-outline-light btn-sm">Înapoi la Meniu</a>
+    </div>
+    <hr style="border-color: var(--coffee-gold);">
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="text-center py-5">
+            <h3 class="text-muted">Nu există comenzi în istoric.</h3>
+            <p class="text-cream">Plasează prima ta comandă chiar acum!</p>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var order in Model)
+            {
+                <div class="col-12 mb-4">
+                    <div class="card card-custom border-gold">
+                        <div class="card-header bg-custom-dark d-flex justify-content-between align-items-center border-bottom border-secondary">
+                            <div>
+                                <span class="badge bg-warning text-dark me-2">@order.OrderId</span>
+                                <span class="text-white small"><i class="far fa-calendar-alt"></i> @order.OrderDate.ToString("dd MMM yyyy HH:mm")</span>
+                            </div>
+                            <div class="text-gold fw-bold">
+                                Total: @order.TotalAmount.ToString("0.00") RON
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 border-end border-secondary">
+                                    <h6 class="text-cream text-uppercase small">Detalii Client</h6>
+                                    <p class="text-white mb-1"><strong>Nume:</strong> @order.CustomerName</p>
+                                    <p class="text-white mb-1"><strong>Adresă:</strong> @order.Address</p>
+                                    <p class="text-muted small">User: @order.Username</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-cream text-uppercase small mb-3">Produse Comandate</h6>
+                                    <ul class="list-group list-group-flush bg-transparent">
+                                        @foreach (var item in order.OrderedItems)
+                                        {
+                                            <li class="list-group-item bg-transparent text-white border-secondary d-flex justify-content-between">
+                                                <span>@item.Name <small class="text-muted">(@item.Category)</small></span>
+                                                <span>@item.Price.ToString("0.00") RON</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

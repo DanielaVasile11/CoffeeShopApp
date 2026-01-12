@@ -15,27 +15,45 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     }
 });
 
+// --- 2. CONFIGURARE SESIUNI (NOU) ---
+// Avem nevoie de aceste linii pentru a ține minte utilizatorul logat
+builder.Services.AddDistributedMemoryCache();
 
-// 2. Adaugă serviciile MVC
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Sesiunea expiră după 30 minute de inactivitate
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Avem nevoie de acest serviciu pentru a accesa sesiunea din Navbar (_Layout)
+builder.Services.AddHttpContextAccessor();
+
+// 3. Adaugă serviciile MVC
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// 3. Configurează Pipeline-ul
+// 4. Configurează Pipeline-ul
 if (app.Environment.IsDevelopment())
 {
-    // Swagger/Debugging (Pot fi dezactivate în final)
+    // Swagger/Debugging
 }
 
 app.UseHttpsRedirection();
-// Activează servirea fișierelor statice din wwwroot (CSS, JS, Imagini)
+
+// Activează servirea fișierelor statice (CSS, JS, Imagini)
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
-// 4. Definește rutarea MVC implicită (Home/Index)
+// --- 5. ACTIVARE SESIUNI (NOU) ---
+// Trebuie pus obligatoriu DUPĂ UseRouting și ÎNAINTE de MapControllerRoute
+app.UseSession();
+
+// 6. Definește rutarea MVC implicită
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

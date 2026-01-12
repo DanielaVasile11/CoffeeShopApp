@@ -1,0 +1,76 @@
+﻿@model List<CoffeeShopAPI.Models.Product>
+
+@{
+    ViewData["Title"] = "Produse Favorite";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="mb-4" style="color: var(--coffee-gold); font-family: 'Times New Roman', serif;">
+                <i class="fas fa-heart me-2"></i> @ViewData["Title"]
+            </h2>
+            <hr style="border-color: var(--coffee-gold);">
+        </div>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="text-center py-5">
+            <div class="display-1 text-muted mb-3"><i class="far fa-heart"></i></div>
+            <h3 class="text-cream">Lista ta de favorite este goală.</h3>
+            <p class="text-white mb-4">Salvează produsele preferate pentru a le comanda mai târziu.</p>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-gold btn-lg mt-3">Vezi Meniul</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-dark table-hover border-gold align-middle">
+                <thead>
+                    <tr style="color: var(--coffee-gold);">
+                        <th>Imagine</th>
+                        <th>Produs</th>
+                        <th>Preț</th>
+                        <th class="text-end">Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        // Logică Imagini
+                        string imageUrl = "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=100";
+                        if (item.Category == "Cafea") { imageUrl = "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=100"; }
+                        else if (item.Category == "Ceai") { imageUrl = "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=100"; }
+                        else if (item.Category == "Deserturi") { imageUrl = "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=100"; }
+                        else if (item.Category == "Snack-uri") { imageUrl = "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=100"; }
+
+                        <tr>
+                            <td style="width: 100px;">
+                                <img src="@imageUrl" class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                            </td>
+                            <td>
+                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">
+                                    <span class="text-cream fw-bold h5">@item.Name</span>
+                                </a><br />
+                                <small class="text-muted">@item.Category</small>
+                            </td>
+                            <td class="text-white fw-bold">@item.Price.ToString("0.00") RON</td>
+                            <td class="text-end">
+                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-light me-1" title="Detalii">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a asp-controller="Favorites" asp-action="MoveToCart" asp-route-id="@item.Id" class="btn btn-sm btn-gold me-1" title="Mută în Coș">
+                                    <i class="fas fa-cart-plus"></i> Adaugă în Coș
+                                </a>
+                                <a asp-controller="Favorites" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Șterge">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

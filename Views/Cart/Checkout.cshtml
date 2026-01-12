@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Finalizare Comandă";
+    decimal total = ViewBag.Total ?? 0;
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-custom p-4 shadow-lg">
+                <h2 class="mb-4 text-center" style="color: var(--coffee-gold); font-family: 'Times New Roman', serif;">
+                    Date de Livrare
+                </h2>
+
+                <div class="alert alert-secondary bg-dark text-white border-gold mb-4">
+                    <strong>Total de plată:</strong> <span class="text-gold float-end">@total.ToString("0.00") RON</span>
+                </div>
+
+                <form asp-action="Checkout" method="post">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-cream">Nume Prenume</label>
+                            <input type="text" name="fullName" class="form-control" required placeholder="Ex: Popescu Ion">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-cream">Telefon</label>
+                            <input type="tel" name="phone" class="form-control" required placeholder="07xx xxx xxx">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-cream">Adresă Livrare</label>
+                        <textarea name="address" class="form-control" rows="3" required placeholder="Strada, Număr, Bloc..."></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-gold btn-lg">
+                            <i class="fas fa-check-circle me-2"></i> Confirmă Comanda
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-light">Înapoi la Coș</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
