@@ -36,8 +36,8 @@ namespace CoffeeShopAPI.Controllers
                     Wishlist.Add(product);
                 }
             }
-            // După adăugare, rămânem pe pagina de produse sau mergem la favorite?
-            // Pentru feedback vizual clar, mergem la lista de favorite:
+           
+            // Pentru feedback vizual mergem la lista de favorite:
             return RedirectToAction("Index");
         }
 

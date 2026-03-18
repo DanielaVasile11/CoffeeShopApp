@@ -15,7 +15,7 @@ namespace CoffeeShopAPI.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            // Verificare Simplă (Hardcodată pentru demo)
+            
 
             // 1. Cazul ADMIN
             if (username == "admin" && password == "1234")
@@ -29,7 +29,7 @@ namespace CoffeeShopAPI.Controllers
             // 2. Cazul USER (CLIENT)
             if (username == "client" && password == "1234")
             {
-                // Salvăm în sesiune că e logat și e User simplu
+                // Salvăm în sesiune că e logat și e User 
                 HttpContext.Session.SetString("UserRole", "User");
                 HttpContext.Session.SetString("Username", "Client Fidel");
                 return RedirectToAction("Index", "Home");

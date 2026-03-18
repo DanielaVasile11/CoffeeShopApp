@@ -19,7 +19,7 @@ namespace CoffeeShopAPI.Controllers
 
        
         // Aceasta este o cheie de TEST publică de la Stripe
-        private const string StripeSecretKey = "CHEIE_TEST";
+        private const string StripeSecretKey = "sk_test_51MzQV9K9XykK9XykK9XykK9XykK9XykK9XykK9XykK9XykK9XykK9XykK9Xyk";
 
         public CartController(ApplicationDbContext context)
         {
@@ -56,7 +56,7 @@ namespace CoffeeShopAPI.Controllers
 
             // Configurare Stripe
             
-            StripeConfiguration.ApiKey = "CHEIE_STRIPE"; 
+            StripeConfiguration.ApiKey = "sk_test_51SQ1AYEn7ydYgtWylaXoAMpZNc6vBeZ2078CBLufSrkPcWkpzH5n33S1NDWS0z9nxTHdeEvMz0YtCF4D0M0NDYuT00FyC6ubth"; 
 
             var domain = "https://localhost:7255"; 
 

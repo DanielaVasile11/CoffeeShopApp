@@ -30,7 +30,7 @@
 
                             <h3 class="text-white mb-4">@Model.Price.ToString("0.00") RON</h3>
 
-                            <p class="card-text text-cream lead mb-5">
+                            <p class="card-text text-cream lead mb-4">
                                 @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "O alegere excelentă pentru a-ți însenina ziua. Preparat din ingrediente proaspete și de calitate superioară.")
                             </p>
 
@@ -47,6 +47,13 @@
                                         </a>
                                     </div>
                                 </div>
+
+                                @if (!string.IsNullOrEmpty(Model.PdfDocumentPath))
+                                {
+                                    <a href="@Model.PdfDocumentPath" target="_blank" class="btn btn-outline-info btn-lg">
+                                        <i class="fas fa-file-pdf me-2"></i> Vezi Detalii Complete (PDF)
+                                    </a>
+                                }
 
                                 <a asp-action="Index" class="btn btn-outline-light">
                                     Înapoi la Meniu

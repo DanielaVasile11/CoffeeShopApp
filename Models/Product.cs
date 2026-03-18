@@ -14,8 +14,11 @@ namespace CoffeeShopAPI.Models
         [Range(0.01, 1000.00, ErrorMessage = "Prețul trebuie să fie pozitiv.")]
         public decimal Price { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public string Category { get; set; } // Cafea, Ceai, Deserturi, etc.
+
+        // Proprietate nouă pentru calea către documentul PDF
+        public string? PdfDocumentPath { get; set; }
     }
 }
